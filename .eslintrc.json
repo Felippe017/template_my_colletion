@@ -11,7 +11,8 @@
       "ecmaFeatures": {
         "jsx": true
       },
-      "project": "./tsconfig.json"
+      "project": "./tsconfig.json",
+      "tsconfigRootDir": "/home/esmaben/template_my_colletion/my-colletion"
     },
     "plugins": ["react", "@typescript-eslint"],
     "rules": {
