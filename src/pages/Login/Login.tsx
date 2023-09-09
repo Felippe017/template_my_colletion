@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -12,9 +14,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
 
 export const Login: React.FC = () => {
-  const [email, setEmail] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-
   const defaultTheme = createTheme({
     palette: {
       background: {
@@ -26,9 +25,27 @@ export const Login: React.FC = () => {
     }
   });
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();    
-  };
+  const validationSchema = yup.object({
+    email: yup
+      .string()
+      .email('Digite um e-mail válidol')
+      .required('E-mail é requerido'),
+    password: yup
+      .string()
+      .min(8, 'Senha deve ter no mínimo 8 caracteres')
+      .required('Senha é requerida'),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      
+    },
+  });
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -55,18 +72,18 @@ export const Login: React.FC = () => {
           >
             MyCollection
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 0 }}>
+          <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{ mt: 0 }}>
             <TextField
               sx={{
                 backgroundColor: '#223041',
                 borderRadius: '5px'
               }}
-              value={ email }
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                setEmail(event.target.value)
-              }}
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
               margin="normal"
-              required
               fullWidth
               id="email"
               data-testid='email'
@@ -81,12 +98,12 @@ export const Login: React.FC = () => {
                 backgroundColor: '#223041',
                 borderRadius: '5px'
               }}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                setPassword(event.target.value)
-              }}
-              value={ password }
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
               margin="normal"
-              required
               fullWidth
               name="password"
               label="SENHA"
