@@ -1,9 +1,9 @@
-import { Login } from './pages/Login/Login'
+import AppRoutes from '@app/routes'
 
 function App() {
   return (
     <>
-      <Login />
+      <AppRoutes />
     </>
   )
 }
