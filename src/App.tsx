@@ -1,10 +1,9 @@
+import AppRoutes from '@app/routes'
 
 function App() {
-
-
   return (
     <>
-      <h1>My Collection</h1>
+      <AppRoutes />
     </>
   )
 }
