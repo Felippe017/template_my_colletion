@@ -70,16 +70,31 @@ export const Login: React.FC = () => {
               fontSize: '30px',
               fontFamily: 'Inter',
               lineHeight: '36.31px',
-              color: '#00FFA3'
+              position: 'relative',
+              '&::before': {
+                content: "'My'",
+                color: '#00FFA3',
+              },
+              '&::after': {
+                content: "'Collection'",
+                color: 'white'
+              },
             }}
-          >
-            MyCollection
-          </Typography>
+          />
           <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{ mt: 0 }}>
             <TextField
               sx={{
                 backgroundColor: '#223041',
-                borderRadius: '5px'
+                borderRadius: '5px',
+                '& label, & label.Mui-focused': {
+                  color: '#3D5470',
+                },
+                '& input::placeholder, & input:focus::placeholder': {
+                  color: '#3D5470', 
+                },
+                '& input': {
+                  color: 'white'
+                }
               }}
               value={formik.values.email}
               onChange={formik.handleChange}
@@ -99,7 +114,16 @@ export const Login: React.FC = () => {
             <TextField
               sx={{
                 backgroundColor: '#223041',
-                borderRadius: '5px'
+                borderRadius: '5px',
+                '& label, & label.Mui-focused': {
+                  color: '#3D5470',
+                },
+                '& input::placeholder, & input:focus::placeholder': {
+                  color: '#3D5470', 
+                },
+                '& input': {
+                  color: 'white'
+                }
               }}
               value={formik.values.password}
               onChange={formik.handleChange}
@@ -129,6 +153,7 @@ export const Login: React.FC = () => {
                 <FormControlLabel
                   control={<Switch data-testid="switch-id" defaultChecked />}
                   label="PERMANECER LOGADO"
+                  style={{ color: 'white' }}
                 />
               </Grid>
               <Grid item>
