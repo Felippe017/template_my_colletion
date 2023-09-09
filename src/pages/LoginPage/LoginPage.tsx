@@ -5,15 +5,18 @@ import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Link from '@mui/material/Link';
+import Link from '@mui/material/Link'
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
+import { useNavigate } from "react-router-dom";
+
 
 export const Login: React.FC = () => {
+  const navigate = useNavigate()
   const defaultTheme = createTheme({
     palette: {
       background: {
@@ -28,23 +31,23 @@ export const Login: React.FC = () => {
   const validationSchema = yup.object({
     email: yup
       .string()
-      .email('Digite um e-mail válidol')
-      .required('E-mail é requerido'),
+      .email('Digite um e-mail válido')
+      .required('E-mail é obrigatório'),
     password: yup
       .string()
       .min(8, 'Senha deve ter no mínimo 8 caracteres')
-      .required('Senha é requerida'),
+      .required('Senha é obrigatória'),
   });
-
+ 
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      
-    },
+    onSubmit: () => {
+      navigate("/", { replace: true })
+    }
   });
 
   return (
