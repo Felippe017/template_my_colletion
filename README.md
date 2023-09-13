@@ -16,6 +16,7 @@
 cd src
 npm install
 
+---
 # Executando aplicação
 ```
 cd src
@@ -24,6 +25,7 @@ npm run dev
 ---
 
 # Executando Testes
+---
   * Para rodar todos os testes:
 
 ```
@@ -34,3 +36,4 @@ npm run test
 ```
 npm run test /nome-do-arquivo-de-test
 ```
+---
