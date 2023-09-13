@@ -1,19 +1,11 @@
 import React from 'react'
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Link from '@mui/material/Link'
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Switch from '@mui/material/Switch';
 import { useNavigate } from "react-router-dom";
-
+import { Button, CssBaseline, FormControlLabel, Link, Grid,
+  Box, Container, Switch } from '@mui/material'
+import { FormsBox, TitleTypography, TextFieldInput } from './styles'  
 
 export const Login: React.FC = () => {
   const navigate = useNavigate()
@@ -46,7 +38,7 @@ export const Login: React.FC = () => {
     },
     validationSchema: validationSchema,
     onSubmit: () => {
-      navigate("/", { replace: true })
+      navigate("/home", { replace: true })
     }
   });
 
@@ -54,48 +46,21 @@ export const Login: React.FC = () => {
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
+        <FormsBox
+          marginTop={8}
+          display='flex'
+          flexDirection='column'
+          alignItems='center'
         >
-          <Typography
-            component="h1"
-            variant="h5"
-            sx={{
-              fontWeight: 400,
-              fontSize: '30px',
-              fontFamily: 'Inter',
-              lineHeight: '36.31px',
-              position: 'relative',
-              '&::before': {
-                content: "'My'",
-                color: '#00FFA3',
-              },
-              '&::after': {
-                content: "'Collection'",
-                color: 'white'
-              },
-            }}
+          <TitleTypography
+            fontWeight={400}
+            fontSize={30}
+            fontFamily="Inter"
+            position="relative"
+            data-testid="title-my-collection" 
           />
           <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{ mt: 0 }}>
-            <TextField
-              sx={{
-                backgroundColor: '#223041',
-                borderRadius: '5px',
-                '& label, & label.Mui-focused': {
-                  color: '#3D5470',
-                },
-                '& input::placeholder, & input:focus::placeholder': {
-                  color: '#3D5470', 
-                },
-                '& input': {
-                  color: 'white'
-                }
-              }}
+            <TextFieldInput
               value={formik.values.email}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -111,20 +76,7 @@ export const Login: React.FC = () => {
               autoComplete="email"
               autoFocus
             />
-            <TextField
-              sx={{
-                backgroundColor: '#223041',
-                borderRadius: '5px',
-                '& label, & label.Mui-focused': {
-                  color: '#3D5470',
-                },
-                '& input::placeholder, & input:focus::placeholder': {
-                  color: '#3D5470', 
-                },
-                '& input': {
-                  color: 'white'
-                }
-              }}
+            <TextFieldInput
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -139,7 +91,6 @@ export const Login: React.FC = () => {
               id="password"
               autoComplete="current-password"
             />
-            
             <Button
               type="submit"
               fullWidth
@@ -149,11 +100,11 @@ export const Login: React.FC = () => {
               ENTRAR
             </Button>
             <Grid container direction={"column"} alignItems="flex-end">
-              <Grid item xs>
+              <Grid item>
                 <FormControlLabel
                   control={<Switch data-testid="switch-id" defaultChecked />}
                   label="PERMANECER LOGADO"
-                  style={{ color: 'white' }}
+                  sx={{ color: 'white' }}
                 />
               </Grid>
               <Grid item>
@@ -163,7 +114,7 @@ export const Login: React.FC = () => {
               </Grid>
             </Grid>
           </Box>
-        </Box>
+        </FormsBox>
       </Container>
     </ThemeProvider>
   )
