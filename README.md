@@ -15,7 +15,7 @@
 ```
 cd src
 npm install
-
+```
 ---
 # Executando aplicação
 ```
@@ -25,15 +25,17 @@ npm run dev
 ---
 
 # Executando Testes
----
   * Para rodar todos os testes:
 
 ```
 npm run test
 ```
-  * Para rodar apenas um arquivo de test
+  * Para rodar os testes de apenas um componente:
  
 ```
-npm run test /nome-do-arquivo-de-test
+npm run test /caminho-do-arquivo-de-teste
 ```
+
+
 ---
+
