@@ -1,9 +1,17 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { HeaderComponent } from "../HeaderComponent";
+import { MemoryRouter } from 'react-router-dom';
+import { CartProvider } from "@app/context/CartContext";
 
 test("Verifica se o título MyCollection e o hamburguer menu são exibidos na tela", () => {
-  render(<HeaderComponent />);
+  render(
+    <MemoryRouter>
+      <CartProvider>
+        <HeaderComponent />
+      </CartProvider>
+    </MemoryRouter>  
+  );
   const titleElement = screen.getByTestId("title-header");
   const hamburguerElement = screen.getByTestId("hamburguer-menu");
 
@@ -12,7 +20,13 @@ test("Verifica se o título MyCollection e o hamburguer menu são exibidos na te
 });
 
 test("Verifica se o carrinho de compras e o ícone de perfil aparecem na tela", () => {
-  render(<HeaderComponent />);
+  render(
+    <MemoryRouter>
+      <CartProvider>
+        <HeaderComponent />
+      </CartProvider>
+    </MemoryRouter>  
+  );
   const shoppingCartElement = screen.getByTestId("shopping-cart");
   const profileIcon = screen.getByTestId("profile-icon");
 
@@ -21,7 +35,13 @@ test("Verifica se o carrinho de compras e o ícone de perfil aparecem na tela", 
 });
 
 test("Verifica se o sidebar é aberto quando o botão hamburger é clicado", async () => {
-  render(<HeaderComponent />);
+  render(
+    <MemoryRouter>
+      <CartProvider>
+        <HeaderComponent />
+      </CartProvider>
+    </MemoryRouter>  
+  );
 
   const hamburguerElement = screen.getByTestId("hamburguer-menu");
   await userEvent.click(hamburguerElement);
@@ -32,7 +52,13 @@ test("Verifica se o sidebar é aberto quando o botão hamburger é clicado", asy
 
 test(`Verifica se quando o sidebar é aberto, aparecem os botões home e perfil,
 searchbar e o botão para fechar o sidebar`, async () => {
-  render(<HeaderComponent />);
+  render(
+    <MemoryRouter>
+      <CartProvider>
+        <HeaderComponent />
+      </CartProvider>
+    </MemoryRouter>  
+  );
 
   const hamburguerElement = screen.getByTestId("hamburguer-menu");
   await userEvent.click(hamburguerElement);
