@@ -2,19 +2,20 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Login } from '../LoginPage';
 import { MemoryRouter } from 'react-router-dom';
-/* import App from '@app/App'
-import { BrowserRouter as Router } from 'react-router-dom';
- */
 
 test('Verifica se o título MyCollection é exibido na tela', () => {
-    render(<Login />);
-    const titleElement = screen.getByText(/mycollection/i);
+    render(<MemoryRouter>
+        <Login />
+      </MemoryRouter>);
+    const titleElement = screen.getByTestId("title-my-collection");
     expect(titleElement).toBeInTheDocument();
 })
 
 
 test('Verifica se os inputs e-mail e senha são exibidos ', () => {
-    render(<Login />);
+    render(<MemoryRouter>
+        <Login />
+      </MemoryRouter>);
     const emailInput = screen.getByLabelText(/e-mail/i)
     const passwordInput = screen.getByPlaceholderText(/senha/i);
 
@@ -25,7 +26,9 @@ test('Verifica se os inputs e-mail e senha são exibidos ', () => {
 
 test('Verifica se o botão "Entrar", "cadastro" e "Permanecer logado" são exibidos na tela ',
     () => {
-        render(<Login />);
+        render(<MemoryRouter>
+            <Login />
+          </MemoryRouter>);
         const button = screen.getByRole('button')
         const switchButton = screen.getByLabelText(/permanecer logado/i)
         const registrationButton = screen.getByTestId("registration-id")
@@ -36,7 +39,9 @@ test('Verifica se o botão "Entrar", "cadastro" e "Permanecer logado" são exibi
 })
 
 test('Verifica erro quando e-mail não é preenchido', async () => {
-    render(<Login />);
+    render(<MemoryRouter>
+        <Login />
+      </MemoryRouter>);
     const button = screen.getByRole('button');
 
     await userEvent.click(button);
@@ -46,7 +51,9 @@ test('Verifica erro quando e-mail não é preenchido', async () => {
 });
 
 test('Verifica erro quando senha não é preenchida', async () => {
-    render(<Login />);
+    render(<MemoryRouter>
+        <Login />
+      </MemoryRouter>);
     const button = screen.getByRole('button');
 
     await userEvent.click(button);
@@ -56,7 +63,9 @@ test('Verifica erro quando senha não é preenchida', async () => {
 });
 
 test('Verifica erro quando e-mail não é válido', async () => {
-    render(<Login />);
+    render(<MemoryRouter>
+        <Login />
+      </MemoryRouter>);
     const emailInput = screen.getByLabelText(/e-mail/i);
     const button = screen.getByRole('button');
 
@@ -68,7 +77,9 @@ test('Verifica erro quando e-mail não é válido', async () => {
 });
 
 test('Verifica se há erro quando senha não possui pelo menos 8 caracteres', async () => {
-    render(<Login />);
+    render(<MemoryRouter>
+        <Login />
+      </MemoryRouter>);
     const passwordInput = screen.getByPlaceholderText(/senha/i);
     const button = screen.getByRole('button');
 
@@ -83,8 +94,7 @@ test('Verifica se o usuário consegue logar na aplicação com sucesso', async (
     render(
         <MemoryRouter>
           <Login />
-        </MemoryRouter>/* ,
-        <Login /> */
+        </MemoryRouter>
       );
     const emailInput = screen.getByLabelText(/e-mail/i);
     const passwordInput = screen.getByPlaceholderText(/senha/i);
